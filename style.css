@@ -1,0 +1,206 @@
+/* ============================================================
+   oswaldkoenig.ch — V1 „Gewebe"
+   Palette: Anden-Textil auf Alpaka-Grund
+   Signatur: die Webkante — unregelmässige Farbbänder
+   mit unscharfen Übergängen. Kein Band ist wie das andere.
+   ============================================================ */
+
+:root {
+  --grund: #FBF7EF;        /* Alpaka */
+  --tinte: #251E28;        /* dunkle Aubergine */
+  --tinte-60: rgba(37, 30, 40, .64);
+  --cochenille: #C13A6B;   /* das Rot aus der Schildlaus */
+  --indigo: #34386F;
+  --gold: #E39A2D;
+  --zinnober: #CE4F2A;
+  --gruen: #2F7A66;
+  --papier: #FFFDF8;
+  --linie: rgba(37, 30, 40, .14);
+
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --lauf: "Newsreader", Georgia, serif;
+  --etikett: "Space Grotesk", system-ui, sans-serif;
+
+  --mass: min(1120px, 92vw);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--tinte);
+  font-family: var(--lauf);
+  font-size: 1.14rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Webbänder (Signatur) ---------- */
+.band {
+  height: 14px;
+  background: linear-gradient(90deg,
+    var(--indigo) 0 9%, var(--cochenille) 11% 24%, var(--gold) 26% 31%,
+    var(--zinnober) 33% 52%, var(--gruen) 54% 61%, var(--indigo) 63% 70%,
+    var(--gold) 72% 81%, var(--cochenille) 83% 100%);
+}
+.band--fein { height: 7px; opacity: .92; }
+
+.gewebe {
+  background:
+    linear-gradient(90deg,
+      var(--cochenille) 0 12%, var(--gold) 15% 22%, var(--indigo) 25% 44%,
+      var(--zinnober) 47% 55%, var(--gruen) 58% 66%, var(--cochenille) 69% 78%,
+      var(--gold) 81% 88%, var(--indigo) 91% 100%);
+}
+
+/* ---------- Grundgerüst ---------- */
+.hof { width: var(--mass); margin-inline: auto; }
+
+header.kopf {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1.5rem; padding: 1.4rem 0 1.1rem;
+  flex-wrap: wrap;
+}
+.wortmarke {
+  font-family: var(--display); font-weight: 700; font-size: 1.22rem;
+  text-decoration: none; color: var(--tinte); letter-spacing: -.01em;
+}
+.wortmarke em { font-style: normal; color: var(--cochenille); }
+nav.haupt { display: flex; gap: 1.35rem; flex-wrap: wrap; }
+nav.haupt a {
+  font-family: var(--etikett); font-size: .95rem; letter-spacing: .02em;
+  color: var(--tinte); text-decoration: none; padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+nav.haupt a:hover, nav.haupt a:focus-visible { border-bottom-color: var(--gold); }
+nav.haupt a[aria-current="page"] { border-bottom-color: var(--cochenille); }
+nav.haupt a.en { color: var(--tinte-60); }
+
+a:focus-visible { outline: 3px solid var(--indigo); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- Held ---------- */
+.held { padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4.5rem); }
+.held h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  line-height: 1.04; letter-spacing: -.02em; margin: 0 0 1.4rem;
+  max-width: 15ch;
+}
+.held h1 .faden { color: var(--cochenille); }
+.held p.stimme {
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem); max-width: 34ch;
+  margin: 0; color: var(--tinte);
+}
+
+/* ---------- Etiketten & Überschriften ---------- */
+.etikett {
+  font-family: var(--etikett); font-size: .85rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--tinte-60); margin: 0 0 .9rem;
+}
+h2.titel {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.12;
+  letter-spacing: -.015em; margin: 0 0 1.2rem;
+}
+h3 { font-family: var(--display); font-weight: 700; font-size: 1.25rem; margin: 0 0 .5rem; }
+
+/* ---------- Türen (drei Situationen) ---------- */
+.tueren { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); padding-bottom: 3.5rem; }
+.tuer {
+  display: block; text-decoration: none; color: var(--tinte);
+  background: var(--papier); border: 1px solid var(--linie);
+  padding: 1.6rem 1.5rem 1.5rem 1.9rem; position: relative;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.tuer::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 9px;
+}
+.tuer:nth-child(1)::before { background: linear-gradient(180deg, var(--cochenille) 0 34%, var(--gold) 38% 62%, var(--indigo) 66% 100%); }
+.tuer:nth-child(2)::before { background: linear-gradient(180deg, var(--gruen) 0 30%, var(--zinnober) 34% 70%, var(--gold) 74% 100%); }
+.tuer:nth-child(3)::before { background: linear-gradient(180deg, var(--indigo) 0 40%, var(--cochenille) 44% 72%, var(--gruen) 76% 100%); }
+.tuer:hover, .tuer:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(37,30,40,.10); }
+.tuer .zitat {
+  font-family: var(--display); font-weight: 700; font-size: 1.28rem;
+  line-height: 1.25; display: block; margin-bottom: .55rem; letter-spacing: -.01em;
+}
+.tuer .hin { font-family: var(--etikett); font-size: .9rem; color: var(--cochenille); }
+
+/* ---------- Abschnitte ---------- */
+section.abschnitt { padding: clamp(2.6rem, 6vw, 4.5rem) 0; }
+section.abschnitt + section.abschnitt { border-top: 1px solid var(--linie); }
+.zweispalt { display: grid; gap: 2.2rem; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+@media (max-width: 780px) { .zweispalt { grid-template-columns: 1fr; } }
+
+/* ---------- Projektkarten (Wirken) ---------- */
+.werke { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.werk {
+  background: var(--papier); border: 1px solid var(--linie);
+  display: flex; flex-direction: column;
+}
+.werk .patch { height: 84px; }
+.werk .innen { padding: 1.35rem 1.4rem 1.5rem; }
+.werk h3 { margin-bottom: .15rem; }
+.werk .rolle { font-family: var(--etikett); font-size: .85rem; color: var(--tinte-60); display: block; margin-bottom: .7rem; }
+.werk p { margin: 0; font-size: 1.04rem; }
+.werk a.mehr { font-family: var(--etikett); font-size: .9rem; color: var(--cochenille); text-decoration: none; margin-top: .8rem; display: inline-block; }
+.werk a.mehr:hover { text-decoration: underline; }
+
+/* individuelle Patches — kein Band wie das andere */
+.patch--zfsg     { background: linear-gradient(90deg, var(--gruen) 0 22%, var(--gold) 25% 40%, var(--cochenille) 43% 70%, var(--indigo) 73% 100%); }
+.patch--summit   { background: linear-gradient(90deg, var(--indigo) 0 30%, var(--zinnober) 33% 55%, var(--gold) 58% 100%); }
+.patch--agora    { background: linear-gradient(90deg, var(--cochenille) 0 18%, var(--indigo) 21% 48%, var(--gruen) 51% 74%, var(--gold) 77% 100%); }
+.patch--pfad     { background: linear-gradient(90deg, var(--gruen) 0 34%, var(--cochenille) 37% 52%, var(--zinnober) 55% 78%, var(--indigo) 81% 100%); }
+.patch--spce     { background: linear-gradient(90deg, var(--gold) 0 20%, var(--cochenille) 23% 46%, var(--indigo) 49% 68%, var(--zinnober) 71% 100%); }
+.patch--dj       { background: linear-gradient(90deg, var(--zinnober) 0 26%, var(--indigo) 29% 50%, var(--cochenille) 53% 72%, var(--gruen) 75% 100%); }
+.patch--bird     { background: linear-gradient(90deg, var(--indigo) 0 24%, var(--gruen) 27% 50%, var(--gold) 53% 76%, var(--cochenille) 79% 100%); }
+
+/* ---------- Formen & Listen ---------- */
+.formen { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.form { border-top: 6px solid; padding-top: 1rem; }
+.form--eins { border-color: var(--zinnober); }
+.form--zwei { border-color: var(--indigo); }
+.form--drei { border-color: var(--gold); }
+.form p { font-size: 1.04rem; margin: .3rem 0 0; }
+
+.nicht {
+  background: var(--tinte); color: var(--grund);
+  padding: clamp(2rem, 4vw, 3rem); margin-top: 3rem;
+}
+.nicht h2 { color: var(--grund); }
+.nicht p { max-width: 62ch; }
+.nicht strong { color: var(--gold); font-weight: 600; }
+
+/* ---------- Gedanken ---------- */
+article.gedanke { max-width: 68ch; }
+article.gedanke h2 { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; margin: 0 0 .4rem; }
+article.gedanke .wann { font-family: var(--etikett); font-size: .88rem; color: var(--tinte-60); display: block; margin-bottom: 1.4rem; }
+article.gedanke p { margin: 0 0 1.2rem; }
+
+/* ---------- <sp_ce> ---------- */
+.buchung {
+  border: 2px dashed var(--linie); background: var(--papier);
+  padding: 2rem; text-align: center; font-family: var(--etikett);
+}
+.buchung a { color: var(--cochenille); }
+
+/* ---------- Kaffee / Fuss ---------- */
+.kaffee { text-align: left; padding: clamp(3rem, 7vw, 5rem) 0; }
+.kaffee p.gross {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem); letter-spacing: -.015em;
+  margin: 0 0 1rem; max-width: 22ch; line-height: 1.15;
+}
+.kaffee a.mail {
+  font-family: var(--etikett); font-size: 1.05rem; color: var(--cochenille);
+  text-decoration: none; border-bottom: 2px solid var(--gold);
+}
+.kaffee a.mail:hover { border-bottom-color: var(--cochenille); }
+
+footer.fuss { border-top: 1px solid var(--linie); padding: 1.3rem 0 2.2rem; font-family: var(--etikett); font-size: .88rem; color: var(--tinte-60); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+footer.fuss a { color: inherit; }
