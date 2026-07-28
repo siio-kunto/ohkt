@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strang — oswaldkoenig.ch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="kopf">
+  <a class="marke-text" href="index.html">&lt;oswaldkoenig.ch&gt;</a>
+  <a class="kopf-link" href="#faden">Faden aufnehmen</a>
+</header>
+<p class="draftband">Draft · Klientennamen: Referenz-Freigaben ausstehend</p>
+
+<main id="strang"></main>
+
+<script>
+/* Die acht Stränge. Reine Daten — Inhalte hier pflegen, nicht im Markup. */
+var STRAENGE = [
+  { slug:'facilitation', num:'1', name:'Facilitation & Prozessdesign', color:'#9E1B32', dark:'#6E1223', fg:'#EEEDF5', ton:'professionell · präzis',
+    oneliner:'Workshops, Retraiten und mehrstufige Beteiligungsprozesse — für Bundesämter, NGOs, Stiftungen und Unternehmen. Massgeschneidert, nie ab Stange.',
+    lede:'Seit 2018 begleite ich Organisationen durch Situationen, in denen der Weg nicht vorgezeichnet ist: Strategieklausuren, Bürgerräte, Multi-Stakeholder-Dialoge, Teamentwicklung. Kontextgetrieben, methodisch breit, nie methodenverliebt.',
+    cta:'Ein Prozess, der Begleitung sucht? Erzähl mir vom Kontext — ich antworte mit Fragen.',
+    knoten:[
+      {t:'NFP 84 — Dialogtag', m:'2026'},
+      {t:'Civitates Forum, Brügge', m:'2026 · Programme Design & Facilitation'},
+      {t:'SAG Dialog Gentechnik', m:'2025/26 · Co-Leitung Programmdesign'},
+      {t:'Demoscan', m:'2025/26 · Community-Strategie & Retreat'},
+      {t:'BAG — Prozessbegleitung & Führungsentwicklung', m:'seit 2023'},
+      {t:'Bevölkerungsrat Gesundheit', m:'2024/25 · Co-Facilitation', d:'Berichtsübergabe im Bundeshaus.'},
+      {t:'Wyss Academy — Strategy Retreats', m:'2025'},
+      {t:'Forum Freudenfels / Liechtenstein Academy', m:'2025'},
+      {t:'Zukunftsrat U24', m:'2023/24'},
+      {t:'Dectris — Radical Collaboration & Organisationsentwicklung', m:'2020–23'},
+      {t:'unDavos', m:'2023–26'},
+      {t:'Forum ö / öbu', m:'2020–23'},
+      {t:'Lichtensteig — Summer of Pioneers', m:'2023–26'},
+      {t:'Ältere Fäden', m:'ab 2018', d:'Greenpeace, WWF, Pro Velo, Intep/öbu Suffizienz, Implenia.'}
+    ]},
+  { slug:'coaching', num:'2', name:'Coaching', color:'#D4326E', dark:'#96204C', fg:'#EEEDF5', ton:'einladend · öffnend',
+    oneliner:'Einzelbegleitung an Übergängen, bei chronischem Kreisverkehr — oder was ganz anderes.',
+    lede:'Manchmal braucht es keinen Rat, sondern einen Raum. Ich arbeite prozessorientiert: Wir folgen dem, was sich zeigt — Rollenwechsel, Entscheidungen, Überlast, oder etwas, das noch keinen Namen hat. Vertraulich, deshalb stehen hier keine Geschichten, sondern eine Einladung.',
+    cta:'Ein erstes Gespräch kostet nichts als eine Stunde Neugier.',
+    knoten:[
+      {t:'1:1-Coaching', m:'seit 2020 · laufend'},
+      {t:'Systemische Aufstellung bei Ivan Verny', m:'2026 · laufend'},
+      {t:'ARUNA Basic Training', m:'2024–26 · laufend'},
+      {t:'Fundament: POP — Prozessorientierte Psychologie', m:'Grundausbildung 2019–21 · Psychosocial Consultant 2021/22'}
+    ]},
+  { slug:'festivitas', num:'3', name:'festivitas.space/ship', color:'#C24D2A', dark:'#8A3016', fg:'#EEEDF5', ton:'inspirierend · künstlerisch',
+    claim:'«Wo Ungewöhnliches sich heimelig fühlt.»',
+    alt:'Claim-Variante zum Testen: «Wo noch Ungewohntes Heimat findet.»',
+    oneliner:'Der Heimathafen für Zukunftsformate und Experimente: Festivals, Agoras, Summits — und Shenanigans, die noch keine Kategorie haben.',
+    lede:'Ein Schiff, kein Gebäude: festivitas legt an, wo eine Stadt oder eine Gemeinschaft ihre Zukunft verhandeln will — lädt ein, feiert, verhandelt, und segelt mit vollem Laderaum weiter. Was an Bord entsteht, gehört den Orten, nicht dem Schiff.',
+    cta:'Eine Stadt, ein Anlass, ein Experiment ohne Kategorie? Das Schiff hat Platz.',
+    link:'https://festivitas.space', linkLabel:'festivitas.space',
+    knoten:[
+      {t:'Zukunftsfestival St. Gallen', m:'laufend · Projektleitung & Kuration', d:'Festivalherbst 2026 in Vorbereitung.', big:true},
+      {t:'Zukunftssummit Biel', m:'2026 · Kuration', d:'Drei Module: Zukunftsartefakte, Living Library, Futuremaker-Space.'},
+      {t:'Agora der Zukunftsvögel', m:'seit 2024', d:'Stationen: Bern, Holdenweid, Alpenhof, Seelisberg.'},
+      {t:'mini.Zuekunft Festival, Lichtensteig', m:'2023–25 · Co-Founder & Lead'},
+      {t:'festivitas.democratia', m:'2023 · u.lab 2x'},
+      {t:'Demokratur', m:'2022'}
+    ]},
+  { slug:'space', num:'4', name:'<sp_ce> Monbijou', color:'#8C4A2F', dark:'#5E2F1C', fg:'#EEEDF5', ton:'klar · dienlich · konkret',
+    oneliner:'Ein <sp_ce> in Bern für Einzelbegleitung, konzentriertes Arbeiten, Meetings oder Kleinstformate — mietbar.',
+    lede:'Ein Raum, der dient statt beeindruckt: hell genug zum Denken, klein genug zum Vertrautwerden. Für alles, was zwischen zwei und zwölf Menschen braucht.',
+    cta:'Termin anfragen — Datum, Format, Anzahl Menschen genügt.',
+    fussnote:'Räume halten ist ein alter Faden: happy(bern)lab (2016–20) → SPACE Pestalozzi (2020) → <sp_ce> Monbijou (seit 2026).',
+    bloecke:[
+      {h:'Angebot & Ausstattung', p:'Einzelbegleitung, konzentriertes Arbeiten, Meetings, Kleinstformate. Ausstattung wächst nach — Details auf Anfrage.'},
+      {h:'Programmierung', p:'Was hier stattfindet: Coachings, Proben, kleine Runden, gelegentlich Öffentliches. Wächst nach.'},
+      {h:'Buchung', p:'Online-Buchung inkl. Twint & 10er-Abo im Aufbau. Bis dahin: per Mail anfragen.'}
+    ],
+    knoten:[]},
+  { slug:'expressions', num:'5', name:'Expressions', color:'#A8C929', dark:'#6C8318', fg:'#2A2430', ton:'verspielt · knapp · offen',
+    alt:'Namens-Varianten zum Prüfen: «Ausdruck» (deutsch) · «Expresiones» (spanisch, der peruanische Faden).',
+    oneliner:'DJ-Sets, Malerei, Worte, Bilder — was raus will, findet eine Form.',
+    lede:'Dieser Strang darf der unfertigste sein. Kein Portfolio, keine Pflicht — nur das, was gerade eine Form gefunden hat.',
+    cta:'Ein Set, ein Bild, eine Bühne? Fragen kostet nichts.',
+    knoten:[
+      {t:'DJ', m:'Sets auf Anfrage · laufend', d:'Musik, wenn die Worte Pause haben.'},
+      {t:'Wächst nach', m:'offen', d:'Malerei, Worte, Bilder — sobald sie so weit sind.'}
+    ]},
+  { slug:'engagements', num:'6', name:'Engagements', color:'#2B4570', dark:'#182A4A', fg:'#EEEDF5', ton:'nüchtern · dankbar',
+    oneliner:'Ämter und Allianzen, denen ich Zeit schenke.',
+    lede:'Nicht alles, was trägt, ist Mandat. Diese Fäden laufen ehrenamtlich oder aus Überzeugung — sie halten das Übrige zusammen.',
+    cta:'Eine Allianz, die einen Faden sucht?',
+    knoten:[
+      {t:'X27 — Verein für die nächste Landesausstellung', m:'Vorstand · seit 2021'},
+      {t:'A4CC — Alliance for Corporate Change', m:'Facilitation & Organising · seit 2022'},
+      {t:'Living Museum', m:'Partnerschaft · in Entwicklung'},
+      {t:'One Young World Switzerland', m:'2022–24'}
+    ]},
+  { slug:'werden', num:'7', name:'Werden', color:'#E5B420', dark:'#A87F0D', fg:'#2A2430', ton:'persönlich · biografisch',
+    sub:'We(i)rdographie — wie ich wurde, wer ich am Werden bin.',
+    oneliner:'Geboren in Lima, zuhause in Bern — der Schweizer Faden · el hilo peruano.',
+    lede:'Zwei Aggregatzustände in einem Bild: das Verlaufende und das Geordnete. Was hier steht, ist keine Erfolgsliste, sondern ein Garten — inklusive der Beete, die nichts wurden.',
+    cta:'Wer bis hierhin gelesen hat, darf sich melden.',
+    linien:[
+      {h:'Stationen', items:[
+        {t:'Selbständig — Facilitator, Coach & Kurator', m:'seit 2018'},
+        {t:'collaboratio helvetica — Co-Founder, Programs & Facilitation', m:'2017–18'},
+        {t:'euforia — vom Praktikum zum Master Trainer', m:'2013–17'},
+        {t:'Swisscom Group HR / TeamLab', m:'2015/16'}
+      ]},
+      {h:'Lernen', items:[
+        {t:'BA Sozialanthropologie, Philosophie & Nachhaltige Entwicklung, Uni Bern', m:'2018–23'},
+        {t:'POP — Prozessorientierte Psychologie, 2-jährige Grundausbildung', m:'2019–21'},
+        {t:'ARUNA', m:'2023–26'},
+        {t:'Radical Collaboration — Certified Trainer', m:'2016/17'},
+        {t:'The Human Element I & II', m:'2014/15'},
+        {t:'Systemische Aufstellungsarbeit, Ivan Verny', m:'2026 · laufend'},
+        {t:'Früher: Uni Genf BARI (ohne Abschluss) · Matura Zug', m:'Garten, kein Schaufenster'}
+      ]}
+    ],
+    knoten:[]},
+  { slug:'werkzeuge', num:'8', name:'Werkzeuge', color:'#5B2D8E', dark:'#3E1D63', fg:'#EEEDF5', ton:'klein · nützlich',
+    oneliner:'Kleine Instrumente, die nebenbei entstehen.',
+    lede:'Kein Schaufenster-Strang — nur im Inventar. Was hier liegt, ist Werkzeug, kein Werk.',
+    cta:'Interesse an einem Werkzeug?',
+    knoten:[
+      {t:'FinanceBird', m:'in Entwicklung', d:'Buchhaltung für Einzelunternehmer:innen, die lieber arbeiten als buchen.'}
+    ]}
+];
+
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+var aktuell = null;
+
+/* Nur Hashes, die einen Strang benennen, wechseln die Seite.
+   Alles andere (#faden) bleibt ein gewöhnlicher Sprunganker. */
+function strangAusHash() {
+  var slug = (location.hash || '').replace('#', '');
+  if (!slug) return STRAENGE[0];
+  var treffer = STRAENGE.filter(function (d) { return d.slug === slug; })[0];
+  return treffer || aktuell || STRAENGE[0];
+}
+
+function zeichne() {
+  var s = strangAusHash();
+  if (s === aktuell) return false;
+  aktuell = s;
+  var h = [];
+
+  h.push('<section class="strang-kopfbereich" style="background:linear-gradient(165deg,' + s.color + ',' + s.dark + ');color:' + s.fg + '">');
+  h.push('<span class="strang-punkt" style="left:68%;top:20%;width:13px;height:13px;animation:einblenden 2s 2.4s both,wandern1 11s -3s infinite"></span>');
+  h.push('<span class="strang-punkt" style="left:82%;top:55%;width:8px;height:8px;animation:einblenden 2s 3.6s both,wandern3 13s -6s infinite"></span>');
+  h.push('<span class="strang-punkt" style="left:58%;top:70%;width:10px;height:10px;animation:einblenden 2s 5s both,wandern2 9.5s -2s infinite"></span>');
+  h.push('<p class="strang-meta">Strang ' + esc(s.num) + ' · ' + esc(s.ton) + '</p>');
+  h.push('<h1 class="strang-name">' + esc(s.name) + '</h1>');
+  if (s.claim) h.push('<p class="strang-claim">' + esc(s.claim) + '</p>');
+  if (s.sub)   h.push('<p class="strang-sub">' + esc(s.sub) + '</p>');
+  h.push('<p class="strang-oneliner">' + esc(s.oneliner) + '</p>');
+  if (s.link)  h.push('<p class="strang-extlink"><a href="' + esc(s.link) + '" target="_blank" rel="noopener">→ ' + esc(s.linkLabel) + '</a></p>');
+  if (s.alt)   h.push('<p class="strang-alt">' + esc(s.alt) + '</p>');
+  h.push('</section>');
+
+  h.push('<section class="abschnitt"><p class="rubrik">Worum es geht</p><p class="abschnitt-text">' + esc(s.lede) + '</p></section>');
+
+  if (s.bloecke && s.bloecke.length) {
+    h.push('<section class="bloecke">');
+    s.bloecke.forEach(function (b) {
+      h.push('<article class="block"><h3>' + esc(b.h) + '</h3><p>' + esc(b.p) + '</p></article>');
+    });
+    h.push('</section>');
+  }
+
+  if (s.linien && s.linien.length) {
+    h.push('<section class="linien">');
+    s.linien.forEach(function (ln) {
+      h.push('<div><h3>' + esc(ln.h) + '</h3>');
+      ln.items.forEach(function (it) {
+        h.push('<div class="linien-eintrag"><span class="t">' + esc(it.t) + '</span><span class="m">' + esc(it.m) + '</span></div>');
+      });
+      h.push('</div>');
+    });
+    h.push('</section>');
+  }
+
+  if (s.knoten && s.knoten.length) {
+    h.push('<section class="abschnitt--eng"><p class="rubrik" style="margin-bottom:22px">Die Knoten · Neustes zuoberst</p><div class="knoten-liste">');
+    s.knoten.forEach(function (k) {
+      h.push('<article class="knoten' + (k.big ? ' knoten--gross' : '') + '">');
+      h.push('<span class="knoten-punkt"></span>');
+      h.push('<h3>' + esc(k.t) + '</h3><p class="m">' + esc(k.m) + '</p>');
+      if (k.d) h.push('<p class="d">' + esc(k.d) + '</p>');
+      h.push('</article>');
+    });
+    h.push('</div></section>');
+  }
+
+  if (s.fussnote) h.push('<section class="abschnitt--eng"><p class="fussnote">' + esc(s.fussnote) + '</p></section>');
+
+  h.push('<section class="faden" id="faden" style="background:' + s.dark + '">');
+  h.push('<h2>Faden aufnehmen</h2><p>' + esc(s.cta) + '</p>');
+  h.push('<a class="faden-knopf" href="mailto:hello@oswaldkoenig.ch?subject=' + encodeURIComponent('Faden aufnehmen — ' + s.name) + '">hello@oswaldkoenig.ch</a>');
+  h.push('</section>');
+
+  h.push('<nav class="andere"><p class="rubrik">Andere Stränge</p><div class="andere-liste">');
+  STRAENGE.forEach(function (a) {
+    if (a.slug === s.slug) return;
+    h.push('<a href="#' + a.slug + '"><span class="punkt-statisch" style="background:' + a.color + '"></span>' + esc(a.name) + '</a>');
+  });
+  h.push('</div><div class="andere-fuss"><span>Ein Garten, kein Schaufenster · Draft — Referenz-Freigaben ausstehend</span><a href="index.html">← zur Hauptschnur</a></div></nav>');
+
+  var root = document.getElementById('strang');
+  root.innerHTML = h.join('');
+  root.style.setProperty('--strang-farbe', s.color);
+  root.style.setProperty('--strang-dunkel', s.dark);
+  document.title = s.name + ' — oswaldkoenig.ch';
+  return true;
+}
+
+window.addEventListener('hashchange', function () {
+  if (zeichne()) window.scrollTo(0, 0);
+});
+zeichne();
+
+/* Beim Direktaufruf mit #faden trotzdem zum CTA-Block springen */
+if ((location.hash || '').replace('#', '') === 'faden') {
+  var ziel = document.getElementById('faden');
+  if (ziel) window.scrollTo(0, ziel.getBoundingClientRect().top + window.pageYOffset);
+}
+</script>
+</body>
+</html>
