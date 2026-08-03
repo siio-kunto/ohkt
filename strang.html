@@ -234,7 +234,53 @@ function zeichne() {
   root.style.setProperty('--strang-farbe', s.color);
   root.style.setProperty('--strang-dunkel', s.dark);
   document.title = s.name + ' — oswaldkoenig.ch';
+  if (s.buchung) beobachteBuchung();
   return true;
+}
+
+/* Cal.com-Inline-Embed (Namespace "raum") — lazy: Script erst laden,
+   wenn der Buchungs-Abschnitt in Sichtweite scrollt. Loader gemäss
+   Cal.com-Embed-Snippet; Brandfarbe per cssVarsPerTheme (Doku-Stand 08/2026,
+   ersetzt styles.branding.brandColor). Konfiguration liegt in Cal.com. */
+var calBereit = false;
+function calStart(container) {
+  if (container.dataset.calInit) return;
+  container.dataset.calInit = '1';
+  if (!calBereit) {
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document;
+    C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) {
+    cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A;
+    cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); };
+    const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") {
+    cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar);
+    p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "raum", { origin: "https://cal.com" });
+    calBereit = true;
+  }
+  Cal.ns.raum("inline", {
+    elementOrSelector: "#spce-booking",
+    calLink: "spce-monbijou/raum",
+    config: { layout: "month_view", theme: "light" }
+  });
+  Cal.ns.raum("ui", {
+    cssVarsPerTheme: { light: { "cal-brand": "#8C4A2F" }, dark: { "cal-brand": "#8C4A2F" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+}
+function beobachteBuchung() {
+  var container = document.getElementById('spce-booking');
+  if (!container || container.dataset.calInit) return;
+  if (!('IntersectionObserver' in window)) { calStart(container); return; }
+  var io = new IntersectionObserver(function (eintraege, obs) {
+    eintraege.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      obs.disconnect();
+      calStart(container);
+    });
+  }, { rootMargin: '400px 0px' });
+  io.observe(container);
 }
 
 window.addEventListener('hashchange', function () {
