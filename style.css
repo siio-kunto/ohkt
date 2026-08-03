@@ -262,6 +262,18 @@ em{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.12em;c
 
 .fussnote{margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;color:rgba(42,36,48,.7)}
 
+/* Buchung (sp_ce) — Cal.com-Embed in einer Karte im Kachelstil */
+.block-link{margin:12px 0 0;font-family:var(--mono);font-size:12px}
+.block-link a{color:var(--erde)}
+.buchen-titel{margin:14px 0 0;font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,36px)}
+.buchen-zeile{margin:12px 0 22px;font-size:15.5px;line-height:1.6;color:rgba(42,36,48,.85);max-width:38em}
+.buchen-karte{background:#fff;border:1px solid rgba(42,36,48,.2);padding:clamp(8px,1.2vw,14px)}
+#spce-booking{width:100%;min-height:640px;overflow:auto}
+.buchen-fallback{margin:14px 0 0;font-family:var(--mono);font-size:12px}
+.buchen-fallback a{color:var(--tinte)}
+.buchen-kurzfristig{margin:8px 0 0;font-family:var(--mono);font-size:12px;color:var(--erde)}
+.buchen-kurzfristig a{color:var(--erde);font-weight:500}
+
 .faden{color:var(--papier);padding:clamp(40px,6vh,64px) var(--rand);background:var(--strang-dunkel,#6E1223)}
 .faden h2{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,36px)}
 .faden p{margin:12px 0 0;font-size:15.5px;line-height:1.6;max-width:30em;opacity:.85}

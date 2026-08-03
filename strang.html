@@ -72,8 +72,13 @@ var STRAENGE = [
     bloecke:[
       {h:'Angebot & Ausstattung', p:'Einzelbegleitung, konzentriertes Arbeiten, Meetings, Kleinstformate. Ausstattung wächst nach — Details auf Anfrage.'},
       {h:'Programmierung', p:'Was hier stattfindet: Coachings, Proben, kleine Runden, gelegentlich Öffentliches. Wächst nach.'},
-      {h:'Buchung', p:'Online-Buchung inkl. Twint & 10er-Abo im Aufbau. Bis dahin: per Mail anfragen.'}
+      {h:'Buchung', p:'Online buchbar — Laufzeiten 1 bis 4 Stunden, Bezahlung per Twint oder Rechnung im Anschluss. 10er-Abo wächst nach.', a:{href:'#buchen', label:'Direkt zum Kalender ↓'}}
     ],
+    buchung:{
+      titel:'Raum buchen',
+      zeile:'Laufzeiten 1 bis 4 Stunden — du wählst beim Buchen. Bezahlung per Twint oder Rechnung im Anschluss. Mindestvorlauf 48 Stunden.',
+      calLink:'spce-monbijou/raum'
+    },
     knoten:[]},
   { slug:'expressions', num:'5', name:'Expressions', color:'#A8C929', dark:'#6C8318', fg:'#2A2430', ton:'verspielt · knapp · offen',
     alt:'Namens-Varianten zum Prüfen: «Ausdruck» (deutsch) · «Expresiones» (spanisch, der peruanische Faden).',
@@ -134,10 +139,12 @@ function esc(v) {
 var aktuell = null;
 
 /* Nur Hashes, die einen Strang benennen, wechseln die Seite.
-   Alles andere (#faden) bleibt ein gewöhnlicher Sprunganker. */
+   Alles andere (#faden, #buchen) bleibt ein gewöhnlicher Sprunganker —
+   #buchen gehört fest zur sp_ce-Seite und rendert sie beim Direktaufruf. */
 function strangAusHash() {
   var slug = (location.hash || '').replace('#', '');
   if (!slug) return STRAENGE[0];
+  if (slug === 'buchen') return STRAENGE.filter(function (d) { return d.slug === 'space'; })[0];
   var treffer = STRAENGE.filter(function (d) { return d.slug === slug; })[0];
   return treffer || aktuell || STRAENGE[0];
 }
@@ -166,8 +173,21 @@ function zeichne() {
   if (s.bloecke && s.bloecke.length) {
     h.push('<section class="bloecke">');
     s.bloecke.forEach(function (b) {
-      h.push('<article class="block"><h3>' + esc(b.h) + '</h3><p>' + esc(b.p) + '</p></article>');
+      h.push('<article class="block"><h3>' + esc(b.h) + '</h3><p>' + esc(b.p) + '</p>');
+      if (b.a) h.push('<p class="block-link"><a href="' + esc(b.a.href) + '">' + esc(b.a.label) + '</a></p>');
+      h.push('</article>');
     });
+    h.push('</section>');
+  }
+
+  if (s.buchung) {
+    h.push('<section class="abschnitt--eng buchen" id="buchen">');
+    h.push('<p class="rubrik">Buchung</p>');
+    h.push('<h2 class="buchen-titel">' + esc(s.buchung.titel) + '</h2>');
+    h.push('<p class="buchen-zeile">' + esc(s.buchung.zeile) + '</p>');
+    h.push('<div class="buchen-karte"><div id="spce-booking"></div></div>');
+    h.push('<p class="buchen-fallback"><a href="https://cal.com/' + esc(s.buchung.calLink) + '" target="_blank" rel="noopener">Buchungsseite direkt öffnen →</a></p>');
+    h.push('<p class="buchen-kurzfristig">Kurzfristiger als 48 Stunden? <a href="mailto:hello@oswaldkoenig.ch?subject=' + encodeURIComponent('Raum buchen — kurzfristig') + '">Schreib direkt: hello@oswaldkoenig.ch</a></p>');
     h.push('</section>');
   }
 
@@ -218,15 +238,21 @@ function zeichne() {
 }
 
 window.addEventListener('hashchange', function () {
-  if (zeichne()) window.scrollTo(0, 0);
+  if (zeichne()) {
+    var anker = document.getElementById((location.hash || '').replace('#', ''));
+    if (anker) window.scrollTo(0, anker.getBoundingClientRect().top + window.pageYOffset);
+    else window.scrollTo(0, 0);
+  }
 });
 zeichne();
 
-/* Beim Direktaufruf mit #faden trotzdem zum CTA-Block springen */
-if ((location.hash || '').replace('#', '') === 'faden') {
-  var ziel = document.getElementById('faden');
+/* Beim Direktaufruf mit #faden oder #buchen trotzdem zum Block springen */
+(function () {
+  var sprung = (location.hash || '').replace('#', '');
+  if (sprung !== 'faden' && sprung !== 'buchen') return;
+  var ziel = document.getElementById(sprung);
   if (ziel) window.scrollTo(0, ziel.getBoundingClientRect().top + window.pageYOffset);
-}
+})();
 </script>
 </body>
 </html>
