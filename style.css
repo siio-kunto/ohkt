@@ -266,7 +266,12 @@ em{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.12em;c
 .block-link{margin:12px 0 0;font-family:var(--mono);font-size:12px}
 .block-link a{color:var(--erde)}
 .buchen-titel{margin:14px 0 0;font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,36px)}
-.buchen-zeile{margin:12px 0 22px;font-size:15.5px;line-height:1.6;color:rgba(42,36,48,.85);max-width:38em}
+.buchen-zeile{margin:12px 0 18px;font-size:15.5px;line-height:1.6;color:rgba(42,36,48,.85);max-width:38em}
+.dauer-wahl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px}
+.dauer-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--erde);margin-right:6px}
+.dauer-knopf{font-family:var(--mono);font-size:12.5px;padding:10px 16px;border:1px solid var(--erde);background:transparent;color:var(--erde);cursor:pointer}
+.dauer-knopf:hover{background:rgba(140,74,47,.12)}
+.dauer-knopf.ist-aktiv{background:var(--erde);color:var(--papier)}
 .buchen-karte{background:#fff;border:1px solid rgba(42,36,48,.2);padding:clamp(8px,1.2vw,14px)}
 #spce-booking{width:100%;min-height:640px;overflow:auto}
 .buchen-fallback{margin:14px 0 0;font-family:var(--mono);font-size:12px}

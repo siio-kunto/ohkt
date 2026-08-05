@@ -76,8 +76,9 @@ var STRAENGE = [
     ],
     buchung:{
       titel:'Raum buchen',
-      zeile:'Dauer 1 bis 4 Stunden — die Auswahl (1h · 2Std · 3Std · 4Std) sitzt oben im Buchungsfenster, 1h ist nur die Vorauswahl. Bezahlung per Twint oder Rechnung im Anschluss. Mindestvorlauf 48 Stunden.',
-      calLink:'spce-monbijou/raum'
+      zeile:'Bezahlung per Twint oder Rechnung im Anschluss. Mindestvorlauf 48 Stunden.',
+      calLink:'spce-monbijou/raum',
+      dauern:[{min:60,label:'1 Stunde'},{min:120,label:'2 Stunden'},{min:180,label:'3 Stunden'},{min:240,label:'4 Stunden'}]
     },
     knoten:[]},
   { slug:'expressions', num:'5', name:'Expressions', color:'#A8C929', dark:'#6C8318', fg:'#2A2430', ton:'verspielt · knapp · offen',
@@ -185,6 +186,13 @@ function zeichne() {
     h.push('<p class="rubrik">Buchung</p>');
     h.push('<h2 class="buchen-titel">' + esc(s.buchung.titel) + '</h2>');
     h.push('<p class="buchen-zeile">' + esc(s.buchung.zeile) + '</p>');
+    if (s.buchung.dauern) {
+      h.push('<div class="dauer-wahl" role="group" aria-label="Dauer wählen"><span class="dauer-label">Dauer</span>');
+      s.buchung.dauern.forEach(function (d) {
+        h.push('<button type="button" class="dauer-knopf' + (d.min === aktDauer ? ' ist-aktiv' : '') + '" data-min="' + d.min + '" aria-pressed="' + (d.min === aktDauer) + '">' + esc(d.label) + '</button>');
+      });
+      h.push('</div>');
+    }
     h.push('<div class="buchen-karte"><div id="spce-booking"></div></div>');
     h.push('<p class="buchen-fallback"><a href="https://cal.com/' + esc(s.buchung.calLink) + '" target="_blank" rel="noopener">Buchungsseite direkt öffnen →</a></p>');
     h.push('<p class="buchen-kurzfristig">Kurzfristiger als 48 Stunden? <a href="mailto:hello@oswaldkoenig.ch?subject=' + encodeURIComponent('Raum buchen — kurzfristig') + '">Schreib direkt: hello@oswaldkoenig.ch</a></p>');
@@ -243,6 +251,27 @@ function zeichne() {
    Cal.com-Embed-Snippet; Brandfarbe per cssVarsPerTheme (Doku-Stand 08/2026,
    ersetzt styles.branding.brandColor). Konfiguration liegt in Cal.com. */
 var calBereit = false;
+var aktDauer = 60; /* Vorauswahl 1 Stunde — die Dauer-Knöpfe laden das Embed neu */
+
+document.addEventListener('click', function (ev) {
+  var knopf = ev.target.closest ? ev.target.closest('.dauer-knopf') : null;
+  if (!knopf) return;
+  var min = parseInt(knopf.dataset.min, 10);
+  if (!min || min === aktDauer) return;
+  aktDauer = min;
+  document.querySelectorAll('.dauer-knopf').forEach(function (k) {
+    var aktiv = parseInt(k.dataset.min, 10) === min;
+    k.classList.toggle('ist-aktiv', aktiv);
+    k.setAttribute('aria-pressed', String(aktiv));
+  });
+  var container = document.getElementById('spce-booking');
+  if (container && container.dataset.calInit) {
+    container.innerHTML = '';
+    delete container.dataset.calInit;
+    calStart(container);
+  }
+});
+
 function calStart(container) {
   if (container.dataset.calInit) return;
   container.dataset.calInit = '1';
@@ -261,7 +290,7 @@ function calStart(container) {
   Cal.ns.raum("inline", {
     elementOrSelector: "#spce-booking",
     calLink: "spce-monbijou/raum",
-    config: { layout: "month_view", theme: "light" }
+    config: { layout: "month_view", theme: "light", duration: String(aktDauer) }
   });
   Cal.ns.raum("ui", {
     cssVarsPerTheme: { light: { "cal-brand": "#8C4A2F" }, dark: { "cal-brand": "#8C4A2F" } },
