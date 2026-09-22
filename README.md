@@ -1,31 +1,38 @@
-# oswaldkoenig.ch — V1 „Gewebe"
+# oswaldkoenig.ch — V1 «Quipu»
 
-Statische Website, kein Build-Schritt, keine Abhängigkeiten. Nur HTML + CSS.
+Statische Website, kein Build-Schritt, keine Abhängigkeiten. HTML, CSS, ein bisschen JS.
+Webfonts selbst gehostet (`assets/fonts/`), keine externen CDNs.
 
-## In 5 Minuten online (GitHub Pages)
+## Hosting & Domain
 
-1. Auf github.com: **New repository** → Name: `oswaldkoenig.ch` (public)
-2. **uploading an existing file** wählen → alle Dateien/Ordner aus diesem Paket reinziehen → Commit
-3. **Settings → Pages** → Source: `Deploy from a branch` → Branch: `main`, Ordner `/ (root)` → Save
-4. Nach ~1 Minute ist die Seite live unter `https://<username>.github.io/oswaldkoenig.ch/`
-
-Squarespace bleibt unberührt — der DNS-Umzug bei Hostpoint kommt erst, wenn die Seite reif ist
-(Schritt „Website 9" im Quipu).
+- **GitHub Pages** aus Branch `main`, Ordner `/ (root)` → Repo `siio-kunto/ohkt`
+- **Custom Domain:** `oswaldkoenig.ch` (Datei `CNAME`), `www` leitet auf die Apex-Domain um
+- **DNS:** Hostpoint. A-Records auf GitHub Pages (185.199.108–111.153), `www` als CNAME auf `siio-kunto.github.io`.
+  MX bleibt bei Google Workspace. Nichts anderes anfassen.
+- **HTTPS:** GitHub stellt das Zertifikat nach dem DNS-Umzug selbst aus (Minuten bis ~1h).
+  Danach in Settings → Pages «Enforce HTTPS» aktivieren.
 
 ## Struktur
 
-- `index.html` — Startseite: Claim + drei Türen
-- `wirken.html` — Portfolio (7 Projekte, Platzhaltertexte = Entwurf)
-- `zusammenarbeit.html` — 3 Situationen, 3 Formen, Preislogik, das Nicht
-- `spce.html` — <sp_ce> mit Buchungs-Platzhalter (Calenso-Widget kommt hier rein)
-- `gedanken/index.html` — Blog, erster Eintrag „Wohnen wir noch…"
-- `osi.html` — Bio
-- `en.html` — EN-Teaser (volle EN-Version folgt)
-- `style.css` — Designsystem „Gewebe" (Anden-Palette, Webbänder)
+- `index.html` — Hauptschnur: Hero, die Stränge (5 + 3 eingeholte), «Gerade», Colophon
+- `strang.html` — alle acht Strangseiten aus einer Datei; Inhalt als Daten in `STRAENGE`
+  (dort pflegen, nicht im Markup). Adressierung per Hash: `strang.html#space` usw.
+- `strang.html#buchen` — Buchung `<sp_ce>` (Cal.com-Inline-Embed, lazy geladen,
+  Fallback-Link, Kurzfristig-Mail). Konfiguration von Verfügbarkeit und Kalender
+  liegt in Cal.com, nicht hier.
+- `404.html` — Kein Knoten an dieser Stelle; leitet bekannte alte Pfade auf den passenden Strang.
+- `style.css` — Designsystem «Quipu» (Papier `#EEEDF5`, Newsreader / Hanken Grotesk / IBM Plex Mono)
+- `assets/` — Kachelbilder, Porträt, Marken-Loop, Fonts
+- `CNAME`, `.nojekyll` — Deploy-Steuerung für GitHub Pages
 
-## Bewusst provisorisch (V1)
+## Buchung `<sp_ce>`
 
-- Mail-Adresse überall: `hallo@oswaldkoenig.ch` — prüfen ob korrekt!
-- Keine Fotos — Farb-Patches als Platzhalter, echte Bilder folgen
-- Nikis VI-Briefing noch nicht eingearbeitet
-- Buchungswidget: Platzhalter bis Calenso-Entscheid
+Cal.com, Event `spce-monbijou/raum`. Öffentlicher Direktlink: https://cal.com/spce-monbijou/raum
+Buchungen und manuelle Blocker laufen über den Google-Unterkalender «<sp_ce>» (hello@oswaldkoenig.ch).
+Bezahlung per Twint oder Rechnung im Anschluss, nicht im Buchungsflow.
+
+## Bewusst provisorisch
+
+- Draft-Band und Fussnotiz «Referenz-Freigaben ausstehend» bleiben, bis die Klientenfreigaben da sind
+- `alt`-Felder in `STRAENGE` (Claim- und Namensvarianten) sind Arbeitsnotizen und werden nicht gerendert
+- Archiv der V1 «Gewebe» (2018er-Ablösung, erster Wurf) liegt lokal unter `V0.1/archiv-gewebe/`, nicht im Deploy
