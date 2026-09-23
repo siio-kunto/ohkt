@@ -33,6 +33,5 @@ Bezahlung per Twint oder Rechnung im Anschluss, nicht im Buchungsflow.
 
 ## Bewusst provisorisch
 
-- Draft-Band und Fussnotiz «Referenz-Freigaben ausstehend» bleiben, bis die Klientenfreigaben da sind
 - `alt`-Felder in `STRAENGE` (Claim- und Namensvarianten) sind Arbeitsnotizen und werden nicht gerendert
 - Archiv der V1 «Gewebe» (2018er-Ablösung, erster Wurf) liegt lokal unter `V0.1/archiv-gewebe/`, nicht im Deploy
