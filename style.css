@@ -149,11 +149,11 @@ em{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.12em;c
 .strang h2{margin:0;font-family:var(--grotesk);font-weight:700;font-size:clamp(16px,1.4vw,19px);line-height:1.25;position:relative}
 .strang p{margin:8px 0 0;font-size:clamp(10.5px,.9vw,13px);line-height:1.55;opacity:.85;min-width:190px;position:relative}
 
-.strang--facilitation{background-image:linear-gradient(rgba(158,27,50,.6),rgba(120,18,38,.9)),url('assets/strang-facilitation.png')}
-.strang--coaching{background-image:linear-gradient(rgba(212,50,110,.55),rgba(150,25,72,.9)),url('assets/strang-coaching.png');background-position:center,30% center}
-.strang--festivitas{background-image:linear-gradient(rgba(194,77,42,.55),rgba(138,48,22,.9)),url('assets/strang-festivitas.png')}
-.strang--space{background-image:linear-gradient(rgba(140,74,47,.55),rgba(94,47,28,.9)),url('assets/strang-space.png')}
-.strang--expressions{background-image:linear-gradient(rgba(168,201,41,.45),rgba(108,131,24,.92)),url('assets/strang-expressions.png')}
+.strang--facilitation{background-image:linear-gradient(rgba(158,27,50,.6),rgba(120,18,38,.9)),url('assets/strang-facilitation.webp')}
+.strang--coaching{background-image:linear-gradient(rgba(212,50,110,.55),rgba(150,25,72,.9)),url('assets/strang-coaching.webp');background-position:center,30% center}
+.strang--festivitas{background-image:linear-gradient(rgba(194,77,42,.55),rgba(138,48,22,.9)),url('assets/strang-festivitas.webp')}
+.strang--space{background-image:linear-gradient(rgba(140,74,47,.55),rgba(94,47,28,.9)),url('assets/strang-space.webp')}
+.strang--expressions{background-image:linear-gradient(rgba(168,201,41,.45),rgba(108,131,24,.92)),url('assets/strang-expressions.webp')}
 .strang--engagements{background:linear-gradient(#2B4570,#182A4A)}
 .strang--werden{background:linear-gradient(#E5B420,#A87F0D)}
 .strang--werkzeuge{background:linear-gradient(#5B2D8E,#3E1D63);flex:.7}
